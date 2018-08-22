@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/threads">Threads</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="#">About</a>
+      </li>
+      <li class="nav-item" *ngIf="sessionInfo && sessionInfo.logged_in==true" >
+          <a class="nav-link" routerLink="#">Logout</a>
+      </li>
+    </ul>
+
+    <span class="navbar-text" *ngIf="sessionInfo">
+      your logged in as : {{sessionInfo.name}} {{sessionInfo|json}}
+    </span>
+
+    <form class="form-inline my-2 my-lg-0" *ngIf="sessionInfo && sessionInfo.logged_in==false" (ngSubmit)="loginSubmit()">
+      <input class="form-control mr-sm-2" type="text" placeholder="Username" [(ngModel)]="login.name" id="name" name="name" minlength="4" #name="ngModel">
+      <input class="form-control mr-sm-2" type="text" placeholder="Password" [(ngModel)]="login.password" id="password" name="password" minlength="4" #password="ngModel">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
+    </form>
+  </div>
+</nav>

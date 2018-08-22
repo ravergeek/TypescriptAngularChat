@@ -1,0 +1,63 @@
+<div class="bs-component">
+  <div class="row">
+    <div class="col-12">
+      <div class="page-header">
+        <h1 id="threads">Threads</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Headings -->
+
+  <div class="row justify-content-start">
+    <div class="btn-group" data-toggle="buttons">
+      <button *ngFor="let thread of threads" type="button" class="btn btn-primary" (click)="clickThread(thread);">{{thread.name}}</button>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12" *ngIf="activeThread!==null">
+
+        <h3 id="threads">s{{activeThread.name}}</h3>
+
+        <form name="LocationForm" (ngSubmit)="messageSubmit()">
+          <div class="form-group">
+            <label for="name">Msg</label>
+            <input type="text" class="form-control" [(ngModel)]="message.content" id="name" name="name" minlength="1" #name="ngModel">
+        
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        
+              <div *ngIf="name.errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="name.errors.minlength">
+                Name must be at least 4 characters long.
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="submitted===true" class="btn btn-success">Save</button>
+        </form>  
+
+
+        <table class="col-12 table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Column heading</th>         
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-active" *ngFor="let message of messages">
+              <th scope="row">Active</th>
+              <td> {{message|json}}</td>
+
+            </tr>
+          </tbody>
+        </table>
+   
+  </div>
+
+  </div>
+</div>
